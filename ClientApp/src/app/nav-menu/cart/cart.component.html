@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Install Angular</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Order</h3>
+  <table class="show-cart table">
+    <tr *ngFor="let dishItem of dishItems; let i=index; trackBy: trackByFn" >
+      <td>{{dishItem?.dish.name}}</td>
+      <td>{{dishItem?.dish.price}}</td>
+      <td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name={{dishItem?.dish.Name}} (click)="extractFromCart(i)">-</button>
+      <input type='number' class='item-count form-control' data-name={{dishItem?.dish.name}} value={{dishItem.count}}>
+      <button class='plus-item btn btn-primary input-group-addon' data-name={{dishItem?.dish.Name}} (click)="addItemToCart(dishItem?.dish)">+</button></div></td>
+      <td><button class='btn btn-danger' data-name={{dishitem?.dish.name}} (click)="removeFromCart(i)">X</button></td>
+       = 
+      <td>{{dishItem?.total}}</td>
+    </tr>
+    <tr>
+
+    </tr>
+  </table>
+<div *ngIf="dishItems.length>0">Total price:{{totalSum}} $<span class="total-cart"></span></div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Checkout</button>
+</mat-dialog-actions>
+
