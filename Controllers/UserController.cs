@@ -7,6 +7,7 @@ using cafeNew.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,12 +21,35 @@ namespace cafeNew.Controllers
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
 
-
-
-        // GET: /<controller>/
-        public IActionResult Index()
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            return View();
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+
+
+
+        [HttpPost]
+        [Route("Register")]
+        //POST : /Register
+        public async Task<Object> PostUser(JObject json)
+        {
+            var user = new User()
+            {
+                Email = (string)json["email"]
+
+            };
+            try
+            {
+                Console.WriteLine(json.ToString());
+                var result = await _userManager.CreateAsync(user, (string)json["password"]);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         

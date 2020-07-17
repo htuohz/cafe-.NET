@@ -1,7 +1,9 @@
 using cafeNew.Data;
+using cafeNew.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +24,8 @@ namespace cafeNew
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson();
             services.AddDbContext<CafeContext>(options =>
             {
                 options.UseMySql(Configuration.GetConnectionString("Default"));
@@ -32,6 +35,11 @@ namespace cafeNew
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddIdentity<User, IdentityRole>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<CafeContext>()
+                .AddDefaultTokenProviders();
+                
         }
 
 
@@ -58,6 +66,7 @@ namespace cafeNew
             }
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

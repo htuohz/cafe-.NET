@@ -6,7 +6,6 @@ namespace cafeNew.Data
 {
     public class CafeContext: DbContext
     {
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<DishOrder> DishOrders { get; set; }
