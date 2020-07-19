@@ -24,8 +24,7 @@ namespace cafeNew
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson();
+            services.AddControllersWithViews();
             services.AddDbContext<CafeContext>(options =>
             {
                 options.UseMySql(Configuration.GetConnectionString("Default"));
@@ -39,6 +38,14 @@ namespace cafeNew
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CafeContext>()
                 .AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            });
                 
         }
 

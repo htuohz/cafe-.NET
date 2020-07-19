@@ -32,17 +32,12 @@ namespace cafeNew.Controllers
         [HttpPost]
         [Route("Register")]
         //POST : /Register
-        public async Task<Object> PostUser(JObject json)
+        public async Task<Object> PostUser(User user)
         {
-            var user = new User()
-            {
-                Email = (string)json["email"]
-
-            };
             try
             {
-                Console.WriteLine(json.ToString());
-                var result = await _userManager.CreateAsync(user, (string)json["password"]);
+                user.UserName = user.Email;
+                var result = await _userManager.CreateAsync(user,user.Password);
                 return Ok(result);
             }
             catch (Exception ex)

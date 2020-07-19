@@ -9,14 +9,14 @@ using cafeNew.Data;
 namespace cafeNew.Migrations
 {
     [DbContext(typeof(CafeContext))]
-    [Migration("20200717071517_initialMigration")]
-    partial class initialMigration
+    [Migration("20200719050629_v8")]
+    partial class v8
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5")
+                .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("cafeNew.Models.Dish", b =>
@@ -90,7 +90,8 @@ namespace cafeNew.Migrations
             modelBuilder.Entity("cafeNew.Models.User", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(11) CHARACTER SET utf8mb4")
+                        .HasMaxLength(11);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -99,6 +100,7 @@ namespace cafeNew.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("EmailConfirmed")
@@ -114,6 +116,10 @@ namespace cafeNew.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("PasswordHash")
