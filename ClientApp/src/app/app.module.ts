@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -19,6 +20,8 @@ import { ProcessHttpmsgService } from './services/process-httpmsg.service';
 import { DishService } from './services/dish.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartService } from './services/cart.service';
+import { UserService } from './services/user.service'
+
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 
@@ -43,6 +46,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
     MatSliderModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
@@ -55,7 +59,8 @@ import { RegistrationComponent } from './user/registration/registration.componen
   providers: [
     DishService,
     ProcessHttpmsgService,
-    CartService
+    CartService,
+    UserService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
