@@ -24,6 +24,7 @@ import { UserService } from './services/user.service'
 
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { LoginComponent } from './user/login/login.component';
 
 
 
@@ -37,7 +38,8 @@ import { RegistrationComponent } from './user/registration/registration.componen
     MenuComponent,
     CartComponent,
     UserComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,7 +54,8 @@ import { RegistrationComponent } from './user/registration/registration.componen
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'menu', component: MenuComponent },
-      { path: 'registration', component: RegistrationComponent}
+      { path: 'registration', component: RegistrationComponent},
+      { path: 'login', component: LoginComponent},
     ]),
     BrowserAnimationsModule
   ],

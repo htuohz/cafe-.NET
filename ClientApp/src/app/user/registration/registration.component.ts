@@ -14,7 +14,7 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   user: User;
   errMess:string;
-  @ViewChild('rform') registerFormDirective;
+  @ViewChild('rform',{static: false}) registerFormDirective;
 
   formErrors = {
     'Email': '',

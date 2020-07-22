@@ -47,10 +47,10 @@
       </div>
     </div>
     <span class="navbar-text">
-      <a id="mylogin">
+      <a id="mylogin" [routerLink]="['/login']">
           <span class="fa fa-sign-in"></span> Login
       </a>
-      <a id="mylogin" [routerLink]="['/registration']">
+      <a id="myRegister" [routerLink]="['/registration']">
         <span class="fa fa-sign-in"></span> Register
       </a>
       <a id="" data-toggle="modal" data-target="#cart" (click)="openDialog()">
