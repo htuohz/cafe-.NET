@@ -40,7 +40,7 @@ namespace cafeNew.Controllers
 
             var order = new Order();
             order.UserId = stringClaimValue;
-            order.OrderPlaced = new DateTime();
+            order.OrderPlaced = DateTime.Now;
             order.DishOrders = dishOrders;
             _db.Orders.Add(order);
             var result = await _db.SaveChangesAsync();

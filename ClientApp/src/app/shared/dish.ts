@@ -1,5 +1,5 @@
 export interface Dish {
-    DishId: number;
+    dishId: number;
     name: string;
     image: string;
     price: number;
