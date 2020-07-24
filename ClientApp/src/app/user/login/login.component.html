@@ -1,15 +1,15 @@
 <div class="container">
     <div class="row col-12 col-sm-6">
         
-        <form action="" class="form-group">
+        <form action="" class="form-group" (ngSubmit)="onSubmit()" [formGroup]="signinForm" role="form" #rform="ngForm">
             <h3>Please Sign In</h3>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="Email" id="" class="form-control" #Email="ngModel" [(ngModel)]="formModel.Email">
+                <input type="email" formControlName="Email" id="" class="form-control" >
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="Password" #Password="ngModel" [(ngModel)]="formModel.Password" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                <input type="password" formControlName="Password" id="" class="form-control" placeholder="" aria-describedby="helpId">
             </div>
             <div class="form-row">
                 <div class="form-group">

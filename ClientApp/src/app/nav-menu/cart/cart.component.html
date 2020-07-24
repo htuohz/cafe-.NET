@@ -20,6 +20,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Checkout</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="onCheckout()">Checkout</button>
 </mat-dialog-actions>
 

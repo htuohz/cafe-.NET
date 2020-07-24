@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Dish } from 'src/app/shared/dish';
 import { CartService, DishItem } from 'src/app/services/cart.service';
 import { Subscription } from 'rxjs';
+import { OrderService } from 'src/app/services/order.service';
 
 
 
@@ -16,7 +17,8 @@ export class CartComponent implements OnInit {
   totalSum: number;
   subscription: Subscription;
   
-  constructor(private cartService: CartService) { 
+  constructor(private cartService: CartService,
+    private orderServie: OrderService) { 
     this.subscription = this.cartService.getItems().subscribe((items)=>{
       this.dishItems = items;
       this.updateSum();
@@ -44,7 +46,32 @@ export class CartComponent implements OnInit {
       return a+b.total;
     },0)
   }
-}
+  
+  onCheckout(){
 
+    var dishOrders = [];
+    console.log(this.dishItems);
+    this.dishItems.forEach(element => {
+      let dishOrder = <DishOrder>({
+        DishId: element.dish.dishId,
+        Quantity: element.count
+      });
+      dishOrders.push(dishOrder);
+    });
+    this.orderServie.submitOrder(dishOrders)
+    .subscribe(
+      (res:any)=>{
+        console.log(res);
+      },
+      err =>{
+        console.log(err);
+      }
+    );
+  }
+}
+export interface DishOrder{
+  DishId: number;
+  Quantity: number;
+}
 
 

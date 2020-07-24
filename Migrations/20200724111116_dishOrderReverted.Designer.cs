@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cafeNew.Data;
 
 namespace cafeNew.Migrations
 {
     [DbContext(typeof(CafeContext))]
-    partial class CafeContextModelSnapshot : ModelSnapshot
+    [Migration("20200724111116_dishOrderReverted")]
+    partial class dishOrderReverted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace cafeNew.Migrations
 
             modelBuilder.Entity("cafeNew.Models.Dish", b =>
                 {
-                    b.Property<int>("DishId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -36,14 +38,14 @@ namespace cafeNew.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("DishId");
+                    b.HasKey("Id");
 
                     b.ToTable("Dishes");
                 });
 
             modelBuilder.Entity("cafeNew.Models.DishOrder", b =>
                 {
-                    b.Property<int>("DishOrderId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -56,7 +58,7 @@ namespace cafeNew.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("DishOrderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("DishId");
 
@@ -67,7 +69,7 @@ namespace cafeNew.Migrations
 
             modelBuilder.Entity("cafeNew.Models.Order", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -77,10 +79,10 @@ namespace cafeNew.Migrations
                     b.Property<DateTime>("OrderPlaced")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("Id");
 
                     b.ToTable("Orders");
                 });
@@ -144,7 +146,7 @@ namespace cafeNew.Migrations
 
             modelBuilder.Entity("cafeNew.Models.DishOrder", b =>
                 {
-                    b.HasOne("cafeNew.Models.Dish", "Dish")
+                    b.HasOne("cafeNew.Models.DishOrder", "Dish")
                         .WithMany()
                         .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)

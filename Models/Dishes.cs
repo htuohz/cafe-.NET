@@ -7,7 +7,8 @@ namespace cafeNew.Models
     public class Dish
     {
         [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int DishId { get; set; }
 
         [Required]
         public string Name { get; set; }

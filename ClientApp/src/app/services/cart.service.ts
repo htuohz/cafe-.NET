@@ -77,7 +77,7 @@ export class CartService {
   getItems(): Observable<DishItem[]>{
 
     let observable = Observable.create(observer => observer.next(this.items));
-    //console.log(this.items);
+    console.log(this.items);
     return observable;
   }
   

@@ -25,6 +25,7 @@ import { UserService } from './services/user.service'
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 
 
@@ -50,7 +51,7 @@ import { LoginComponent } from './user/login/login.component';
     MatDialogModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'home', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'menu', component: MenuComponent },
@@ -63,7 +64,12 @@ import { LoginComponent } from './user/login/login.component';
     DishService,
     ProcessHttpmsgService,
     CartService,
-    UserService
+    UserService,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [

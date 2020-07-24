@@ -23,6 +23,7 @@ export class MenuComponent implements OnInit {
      this.dishService.getDishes()
     .subscribe((dishes) => {
       this.dishes = dishes;
+      console.log(this.dishes);
     },
       errmess => this.errMess = <any>errmess);
   }
