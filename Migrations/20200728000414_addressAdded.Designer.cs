@@ -2,54 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cafeNew.Data;
 
 namespace cafeNew.Migrations
 {
     [DbContext(typeof(CafeContext))]
-    partial class CafeContextModelSnapshot : ModelSnapshot
+    [Migration("20200728000414_addressAdded")]
+    partial class addressAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("cafeNew.Models.Address", b =>
-                {
-                    b.Property<int>("AddressId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Fullname")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
-
-                    b.Property<string>("State")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Suburb")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.HasKey("AddressId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Addresses");
-                });
 
             modelBuilder.Entity("cafeNew.Models.Dish", b =>
                 {
@@ -105,9 +73,6 @@ namespace cafeNew.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("OrderFulfilled")
                         .HasColumnType("datetime(6)");
 
@@ -118,8 +83,6 @@ namespace cafeNew.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("OrderId");
-
-                    b.HasIndex("AddressId");
 
                     b.ToTable("Orders");
                 });
@@ -181,13 +144,6 @@ namespace cafeNew.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("cafeNew.Models.Address", b =>
-                {
-                    b.HasOne("cafeNew.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("cafeNew.Models.DishOrder", b =>
                 {
                     b.HasOne("cafeNew.Models.Dish", "Dish")
@@ -199,15 +155,6 @@ namespace cafeNew.Migrations
                     b.HasOne("cafeNew.Models.Order", "Order")
                         .WithMany("DishOrders")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("cafeNew.Models.Order", b =>
-                {
-                    b.HasOne("cafeNew.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

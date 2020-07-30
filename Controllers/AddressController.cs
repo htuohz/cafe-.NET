@@ -8,7 +8,6 @@ using cafeNew.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,22 +15,21 @@ namespace cafeNew.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrderController : Controller
+    public class AddressController : Controller
     {
-
-        private readonly ILogger<MenuController> _logger;
+        private readonly ILogger<AddressController> _logger;
         private readonly CafeContext _db;
 
-        public OrderController(ILogger<MenuController> logger, CafeContext db)
+        public AddressController(ILogger<AddressController> logger, CafeContext db)
         {
             _logger = logger;
             _db = db;
         }
 
-        [HttpPost]
-        [Route("PlaceOrder")]
-        //POST : /Register
-        public async Task<Object> PostOrder(Order order)
+
+        [HttpGet]
+        [Route("GetAddress")]
+        public object GetAddress()
         {
             var accessToken = Request.Headers[HeaderNames.Authorization];
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -39,22 +37,30 @@ namespace cafeNew.Controllers
 
             var stringClaimValue = securityToken.Claims.First(claim => claim.Type == "UserID").Value;
 
-            
-            order.UserId = stringClaimValue;
-            order.OrderPlaced = DateTime.Now;
-            _db.Orders.Add(order);
+            var result = _db.Addresses.Where(b => b.Email == stringClaimValue);
+            return Ok(result);
+        }
+
+
+        [HttpPost]
+        [Route("AddAddress")]
+        public async Task<Object> AddAddress(Address address)
+        {
+            var accessToken = Request.Headers[HeaderNames.Authorization];
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.ReadToken(accessToken) as JwtSecurityToken;
+
+            var stringClaimValue = securityToken.Claims.First(claim => claim.Type == "UserID").Value;
+
+            address.Email = stringClaimValue;
+            _db.Addresses.Add(address);
             var result = await _db.SaveChangesAsync();
-            return result;
+            return address;
 
             //order.UserId = 
             //_db.DishOrders.AddRange(dishOrders);
 
 
         }
-
-
-
-
-
     }
 }

@@ -12,7 +12,7 @@ namespace cafeNew.Data
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<DishOrder> DishOrders { get; set; }
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Address> Addresses { get; set; }
 
         public CafeContext(DbContextOptions<CafeContext> options) : base(options)
         {

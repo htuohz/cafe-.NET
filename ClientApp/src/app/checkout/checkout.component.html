@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row centered-form">
+    <div class="col-40">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                    <h3 class="panel-title">Please confirm your order</h3>
+                     </div>
+                     <div class="panel-body">
+                    <form novalidate [formGroup]="addressForm" role="form" #aform="ngForm" (ngSubmit)="addAddress()">
+                        <div class="form-group" >
+                            <label for="fullName">Select from my stored addresses</label>
+                            <select name="" id="" (onchange)="onSelectChange($event)">
+                                <option value="">Please select an address</option>
+                                <option *ngFor="let address of storedAddresses" [value]="address.addressId">
+                                {{address.fullname+','+address.street+','+address.suburb+','+address.state+','+address.phone}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" formControlName="fullname" id="fullName" class="form-control input-sm" placeholder="Address Line">
+                        </div>
+                        <div class="form-group">
+                            <label for="street">Adress Line</label>
+                            <input type="text" formControlName="street" id="street" class="form-control input-sm" placeholder="Address Line">
+                        </div>
+                        <div class="form-group">
+                            <label for="suburb">Suburb</label>
+                            <input type="suburb" formControlName="suburb" id="suburb" class="form-control input-sm" placeholder="Suburb">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="state" formControlName="state" id="state" class="form-control input-sm" placeholder="state">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Tel. Number</label>
+                            <input type="tel" formControlName="phone" id="phone" class="form-control input-sm" placeholder="Tel. Number">
+                        </div>
+                        <input type="submit" value="Add to my addresses" class="btn btn-info btn-block">
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-30">
+            <div class="container">
+              <h4>Your order</h4>
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Sum</th>
+                    </tr>
+                    <tr *ngFor="let item of dishItems">
+                        <td>{{item.dish.name}} </td>
+                        <td>{{item.count}} </td>
+                        <td>{{item.total}} </td>
+                    </tr>
+                </table>
+              <hr>
+              <p>Total <span class="price" style="color:black"><b>${{totalSum}} </b></span></p>
+              <button class="btn btn-primary">Confirm</button>
+            </div>
+          </div>
+    </div>
+
+    
+</div>

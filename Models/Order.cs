@@ -16,5 +16,8 @@ namespace cafeNew.Models
 
         public ICollection<DishOrder> DishOrders { get; set; }
 
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
+
     }
 }

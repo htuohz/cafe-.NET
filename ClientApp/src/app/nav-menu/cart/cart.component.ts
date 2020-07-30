@@ -47,31 +47,7 @@ export class CartComponent implements OnInit {
     },0)
   }
   
-  onCheckout(){
 
-    var dishOrders = [];
-    console.log(this.dishItems);
-    this.dishItems.forEach(element => {
-      let dishOrder = <DishOrder>({
-        DishId: element.dish.dishId,
-        Quantity: element.count
-      });
-      dishOrders.push(dishOrder);
-    });
-    this.orderServie.submitOrder(dishOrders)
-    .subscribe(
-      (res:any)=>{
-        console.log(res);
-      },
-      err =>{
-        console.log(err);
-      }
-    );
-  }
-}
-export interface DishOrder{
-  DishId: number;
-  Quantity: number;
 }
 
 
