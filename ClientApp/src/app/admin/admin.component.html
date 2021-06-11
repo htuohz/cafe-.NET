@@ -1,0 +1,44 @@
+<!-- <div class="sidenav">
+    <ul>
+      <li
+        class="nav-item"
+        [routerLinkActive]="['link-active']"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a class="nav-link text-dark" routerLink="dish">Dishes</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link text-dark" routerLink="order"
+          >Orders</a
+        >
+      </li>
+    </ul>
+</div>
+<div class="main">
+
+</div> -->
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+               <ul>
+                <li
+                  class="nav-item"
+                  [routerLinkActive]="['link-active']"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <a class="nav-link text-dark" routerLink="dish">Dishes</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['link-active']">
+                  <a class="nav-link text-dark" routerLink="order"
+                    >Orders</a
+                  >
+                </li>
+              </ul>
+  </mat-sidenav>
+
+  <mat-sidenav-content >
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+

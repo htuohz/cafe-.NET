@@ -1,25 +1,26 @@
 <div class="container">
-    <div class="row col-12 col-sm-6">
-        
+  <div class="row centered-form">
+    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Please sign in</h3>
+        </div>
+
+      <div class="panel-body">
         <form action="" class="form-group" (ngSubmit)="onSubmit()" [formGroup]="signinForm" role="form" #rform="ngForm">
-            <h3>Please Sign In</h3>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" formControlName="Email" id="" class="form-control" >
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" formControlName="Password" id="" class="form-control" placeholder="" aria-describedby="helpId">
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                </div>
-                
-            </div>
-            
-        </form>
+          <div class="form-group">
+              <input type="email" formControlName="Email" class="form-control input-sm" placeholder="Email Address" >
+          </div>
+          <div class="form-group">
+              <input type="password" formControlName="Password" class="form-control input-sm" placeholder="Password" aria-describedby="helpId">
+          </div>
+          <input type="submit" value="Sign in" class="btn btn-info btn-block"/>
+      </form>
+      </div>
+    </div>
 
 
     </div>
+  </div>
+
 </div>

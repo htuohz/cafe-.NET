@@ -49,7 +49,7 @@ namespace cafeNew.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return  NotFound();
             }
             
         }

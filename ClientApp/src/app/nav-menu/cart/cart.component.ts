@@ -16,9 +16,9 @@ export class CartComponent implements OnInit {
   dishItems: DishItem[] = [];
   totalSum: number;
   subscription: Subscription;
-  
+
   constructor(private cartService: CartService,
-    private orderServie: OrderService) { 
+    private orderServie: OrderService) {
     this.subscription = this.cartService.getItems().subscribe((items)=>{
       this.dishItems = items;
       this.updateSum();
@@ -46,7 +46,9 @@ export class CartComponent implements OnInit {
       return a+b.total;
     },0)
   }
-  
+  trackByFn(index,dish){
+    return dish.dishId;
+  }
 
 }
 

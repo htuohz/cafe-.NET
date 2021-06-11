@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CartComponent } from './cart/cart.component';
 import { RegistrationComponent } from '../user/registration/registration.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -17,7 +18,18 @@ import { RegistrationComponent } from '../user/registration/registration.compone
 })
 export class NavMenuComponent {
   isExpanded = false;
-  constructor(public dialog: MatDialog) {}
+  hasToken:any = undefined
+  constructor(public dialog: MatDialog, private userService: UserService) {
+    this.userService.tokenValue.subscribe((nextValue)=>{
+      if(nextValue!=undefined){
+        this.hasToken = true;
+      }
+    })
+  }
+  ngOnInit(): void {
+
+  }
+
   collapse() {
     this.isExpanded = false;
   }
@@ -28,7 +40,10 @@ export class NavMenuComponent {
       console.log(`Dialog result: ${result}`);
     });
   }
-
+  onLogout(){
+    localStorage.setItem('token',undefined);
+    this.hasToken = false;
+  }
 
   toggle() {
     this.isExpanded = !this.isExpanded;

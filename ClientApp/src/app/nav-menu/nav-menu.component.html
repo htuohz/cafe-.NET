@@ -32,18 +32,32 @@
               >Menu</a
             >
           </li>
+          <!-- <li *ngIf="expression" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/menu']"
+              >Admin</a
+            >
+          </li> -->
         </ul>
 
       </div>
     </div>
     <span class="navbar-text">
-      <a id="mylogin" [routerLink]="['/login']">
+      <ng-container *ngIf="hasToken; else elseTemplate">
+        <a class="btn" (click)="onLogout()">
+          <span class="fa fa-sign-in"></span> Logout
+        </a>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a id="mylogin" [routerLink]="['/login']" class="btn">
           <span class="fa fa-sign-in"></span> Login
       </a>
-      <a id="myRegister" [routerLink]="['/registration']">
+      </ng-template>
+
+
+      <a id="myRegister" [routerLink]="['/registration']" class="btn">
         <span class="fa fa-sign-in"></span> Register
       </a>
-      <a id="" data-toggle="modal" data-target="#cart" (click)="openDialog()">
+      <a id="" data-toggle="modal" data-target="#cart" class="btn" (click)="openDialog()">
         <span class="fa fa-shopping-cart"></span>Cart
     </a>
   </span>

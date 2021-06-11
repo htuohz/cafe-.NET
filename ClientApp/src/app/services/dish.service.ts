@@ -13,15 +13,15 @@ export class DishService {
   baseUrl : string;
   constructor(private http: HttpClient,
     private processHTTPMsgService: ProcessHttpmsgService,
-    @Inject('BASE_URL') baseUrl: string) { 
+    @Inject('BASE_URL') baseUrl: string) {
       this.baseUrl = baseUrl;
     }
 
   getDishes(): Observable<Dish[]>{
-    return this.http.get<Dish[]>(this.baseUrl+'menu/getdishes')
+    return this.http.get<Dish[]>(this.baseUrl+'api/menu')
       .pipe(catchError(this.processHTTPMsgService.handleError));
-    
+
   }
 
-  
+
 }

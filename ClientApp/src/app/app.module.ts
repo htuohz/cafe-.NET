@@ -7,6 +7,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSidenavModule,MatButtonModule,MatIconModule } from '@angular/material/'
+import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -26,7 +28,10 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { LoginComponent } from './user/login/login.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { CheckoutComponent } from './checkout/checkout.component';
-
+import { baseURL } from './shared/baseUrl';
+import { AdminComponent } from './admin/admin.component';
+import { OrderComponent } from './admin/order/order.component';
+import { DishComponent } from './admin/dish/dish.component'
 
 
 @NgModule({
@@ -39,7 +44,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
     UserComponent,
     RegistrationComponent,
     LoginComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AdminComponent,
+    OrderComponent,
+    DishComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -49,12 +57,27 @@ import { CheckoutComponent } from './checkout/checkout.component';
     MatProgressSpinnerModule,
     MatDialogModule,
     ReactiveFormsModule,
+    MatSidenavModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent, pathMatch: 'full' },
       { path: 'menu', component: MenuComponent },
       { path: 'registration', component: RegistrationComponent},
       { path: 'login', component: LoginComponent},
-      { path: 'checkout', component: CheckoutComponent}
+      { path: 'checkout', component: CheckoutComponent},
+      { path: 'admin',component:AdminComponent,children:[
+        {
+          path: 'order',
+          component: OrderComponent
+       },
+       {
+          path: 'dish',
+          component: DishComponent
+       }
+      ]}
     ]),
     BrowserAnimationsModule
   ],
@@ -68,7 +91,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
       provide:HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi:true
-    }
+    },
+    { provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent],
   entryComponents: [

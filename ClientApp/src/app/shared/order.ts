@@ -1,8 +1,6 @@
 export class Order{
     addressId: number;
     dishOrders: DishOrder[];
-
-
 }
 
 export interface DishOrder{

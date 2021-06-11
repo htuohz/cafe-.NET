@@ -12,9 +12,9 @@ using Newtonsoft.Json;
 
 namespace cafeNew.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]  
-    public class MenuController: ControllerBase
+
+    [Route("api/[controller]")]  
+    public class MenuController: Controller
     {
 
         private readonly ILogger<MenuController> _logger;
@@ -27,16 +27,14 @@ namespace cafeNew.Controllers
             Init();
         }
 
-        [HttpGet("getdishes")]
-        public IEnumerable<Dish> getdishes()
+        [HttpGet]
+        public IEnumerable<Dish> Get()
         {
-            var dishes = new List<Dish>();
-
-            dishes = _db.Dishes.ToList();
+            var dishes = _db.Dishes.ToList();
             return dishes;         
         }
 
-        public void Init()
+        private void Init()
         {
             if (_db.Dishes.Count() == 0)
             {

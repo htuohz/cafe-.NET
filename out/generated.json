@@ -1,0 +1,16 @@
+﻿[
+
+  {
+    "Name": "pizza",
+    "Description": "The pizza is delicious",
+    "Price": 10.5,
+    "Image": "https://b.zmtcdn.com/data/reviews_photos/68d/18bdfc4071f7daff3077dc93a8eaa68d_1544025555.jpg"
+  },
+  {
+    "Name": "pizza2",
+    "Description": "The pizza is delicious too",
+    "Price": 13.0,
+    "Image": "https://b.zmtcdn.com/data/reviews_photos/68d/18bdfc4071f7daff3077dc93a8eaa68d_1544025555.jpg"
+  }
+  
+]

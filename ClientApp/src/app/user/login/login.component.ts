@@ -13,11 +13,12 @@ export class LoginComponent implements OnInit {
   signinForm: FormGroup;
   constructor(private userService: UserService,
     private router: Router,
-    private fb: FormBuilder) { 
+    private fb: FormBuilder) {
       this.createForm();
     }
 
   ngOnInit() {
+
   }
   createForm(){
     this.signinForm = this.fb.group({
@@ -26,13 +27,14 @@ export class LoginComponent implements OnInit {
     });
 
   }
-  
+
   onSubmit(){
     this.userService.Signin(this.signinForm.value)
       .subscribe(
         (res:any)=>{
           localStorage.setItem('token',res.token);
           this.router.navigateByUrl('/home');
+          this.userService.token = res.token
         },
         err =>{
           console.log(err);

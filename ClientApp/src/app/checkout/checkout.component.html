@@ -9,9 +9,9 @@
                     <form novalidate [formGroup]="addressForm" role="form" #aform="ngForm" (ngSubmit)="addAddress()">
                         <div class="form-group" >
                             <label for="fullName">Select from my stored addresses</label>
-                            <select name="" id="" (onchange)="onSelectChange($event)">
+                            <select name="" id="" (change)="onSelectChange($event)">
                                 <option value="">Please select an address</option>
-                                <option *ngFor="let address of storedAddresses" [value]="address.addressId">
+                                <option *ngFor="let address of storedAddresses" [value]="address.addressId" >
                                 {{address.fullname+','+address.street+','+address.suburb+','+address.state+','+address.phone}}
                                 </option>
                             </select>
@@ -37,7 +37,7 @@
                             <input type="tel" formControlName="phone" id="phone" class="form-control input-sm" placeholder="Tel. Number">
                         </div>
                         <input type="submit" value="Add to my addresses" class="btn btn-info btn-block">
-                    
+
                     </form>
                 </div>
             </div>
@@ -59,10 +59,10 @@
                 </table>
               <hr>
               <p>Total <span class="price" style="color:black"><b>${{totalSum}} </b></span></p>
-              <button class="btn btn-primary">Confirm</button>
+              <button class="btn btn-primary" (click)="onCheckout()">Confirm</button>
             </div>
           </div>
     </div>
 
-    
+
 </div>

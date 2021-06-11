@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DishOrder } from '../nav-menu/cart/cart.component';
+import { DishOrder, Order } from '../shared/order';
 import { ProcessHttpmsgService } from './process-httpmsg.service';
 import { map, catchError } from 'rxjs/operators';
 
@@ -16,11 +16,15 @@ export class OrderService{
     @Inject('BASE_URL') baseUrl: string) {
       this.baseUrl = baseUrl;
      }
-  
-  submitOrder(dishOrders: DishOrder[]): Observable<any>{
-    return this.http.post<any>(this.baseUrl+'order/PlaceOrder',dishOrders)
+
+  submitOrder(order: Order): Observable<any>{
+    return this.http.post<any>(this.baseUrl+'order/PlaceOrder',order)
       .pipe(catchError(this.processHTTPMsgService.handleError));
-    
+  }
+
+  getOrders(): Observable<any>{
+    return this.http.get<any>(this.baseUrl+'order')
+      .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
 }

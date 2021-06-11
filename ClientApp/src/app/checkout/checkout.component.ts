@@ -20,7 +20,7 @@ export class CheckoutComponent implements OnInit {
   errMess:string;
   storedAddresses: Address[] = [];
   dishItems: DishItem[] = [];
-  totalSum: Number;
+  totalSum: Number = 0;
   @ViewChild('aform',{static: false}) addressFormDirective;
   formErrors = {
     fullname: '',
@@ -86,25 +86,29 @@ export class CheckoutComponent implements OnInit {
     private addressService: AddressService,
     private fb: FormBuilder,
     private cartService: CartService) {
-      this.createForm();
-      this.getAddresses();
-      this.cartService.getItems()
-        .subscribe(res => this.dishItems = res);
-      this.updateSum();
+
      }
 
 
 
 
   ngOnInit() {
+    this.createForm();
+    this.getAddresses();
+    this.cartService.getItems()
+      .subscribe(res => this.dishItems = res);
+    this.updateSum();
     this.address = this.addressForm.value;
-    
-    
+
+
 
   }
 
   onCheckout(){
-    var order = new Order();
+    let order:Order = {
+      addressId:this.addressId,
+      dishOrders:[]
+    };
     console.log(this.dishItems);
     this.dishItems.forEach(element => {
       let dishOrder = <DishOrder>({
@@ -113,20 +117,23 @@ export class CheckoutComponent implements OnInit {
       });
       order.dishOrders.push(dishOrder);
     });
-    // order.addressId = 
-    // this.orderServie.submitOrder(dishOrders)
-    // .subscribe(
-    //   (res:any)=>{
-    //     console.log(res);
-    //   },
-    //   err =>{
-    //     console.log(err);
-    //   }
-    // );
+    if(this.addressId!=0){
+      order.addressId = this.addressId;
+      this.orderServie.submitOrder(order)
+      .subscribe(
+        (res:any)=>{
+          console.log(res);
+        },
+        err =>{
+          console.log(err);
+        }
+      );
+    }
+
   }
 
   onSelectChange(event){
-    console.log(event);
+    this.addressId = event.target.value;
   }
 
   addAddress(){
@@ -135,12 +142,13 @@ export class CheckoutComponent implements OnInit {
     console.log(this.address);
     this.addressService.AddAdress(this.address)
       .subscribe(res => {
+        this.getAddresses();
         return;
       },
       errmess => {
         this.errMess = <any>errmess
       });
-    this.getAddresses();
+
   }
 
   getAddresses(){
@@ -158,6 +166,7 @@ export class CheckoutComponent implements OnInit {
       return a+b.total;
     },0)
   }
+
 
 }
 

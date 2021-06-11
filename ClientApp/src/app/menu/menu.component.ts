@@ -10,7 +10,7 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  
+
   constructor(private dishService: DishService,
     @Inject('BASE_URL') baseUrl: string,
     private cartService: CartService) { }

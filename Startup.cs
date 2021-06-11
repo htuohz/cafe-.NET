@@ -30,9 +30,10 @@ namespace cafeNew
         {
             //Inject AppSettings
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddDbContext<CafeContext>(options =>
             {
+  
                 options.UseMySql(Configuration.GetConnectionString("Default"));
             });
             // In production, the Angular files will be served from this directory
@@ -119,7 +120,8 @@ namespace cafeNew
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }

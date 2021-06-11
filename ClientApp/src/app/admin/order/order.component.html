@@ -1,0 +1,9 @@
+<mat-list>
+  <mat-list-item *ngFor="let order of orders">
+    <h3 matLine> {{order.orderId}} </h3>
+    <p matLine>
+      <span> {{order.userId}} </span>
+    </p>
+  </mat-list-item>
+</mat-list>
+
